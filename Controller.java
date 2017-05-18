@@ -15,8 +15,8 @@ public class Controller {
     private ImageView turn;
 
     protected static final Image
-            xImage = new Image("file:rcs/xImage.png"),
-            oImage = new Image("file:rcs/oImage.png");
+            xImage = new Image(getClass().getResource("/rcs/xImage.png")),
+            oImage = new Image(getClass().getResource("/rcs/oImage.png"));
 
     private ImageView[] cells;
 
