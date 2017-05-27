@@ -6,8 +6,6 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    protected static Stage stage;
-
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("tictactoe.fxml"));
@@ -17,8 +15,6 @@ public class Main extends Application {
         primaryStage.getIcons().add(Controller.xImage);
 
         primaryStage.show();
-
-        Main.stage = primaryStage;
     }
 
 

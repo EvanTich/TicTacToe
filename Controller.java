@@ -14,9 +14,7 @@ public class Controller {
     @FXML
     private ImageView turn;
 
-    protected static final Image
-            xImage = new Image("file:rcs/xImage.png"),
-            oImage = new Image("file:rcs/oImage.png");
+    protected static Image xImage, oImage;
 
     private ImageView[] cells;
 
@@ -39,7 +37,7 @@ public class Controller {
                     return true;
                 }
                 // alert of winnings, winner is [player1Turn ? xImage : oImage]
-                alertWin();
+                alertWinner("You Win!", "Congratulations!");
             } else {
                 player1Turn = !player1Turn;
                 turn.setImage(player1Turn ? xImage : oImage);
@@ -71,31 +69,26 @@ public class Controller {
         return false;
     }
 
-    private void alertWin() {
+    private void alertWinner(String title, String content) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("You Win!");
+        alert.setTitle(title);
         alert.setHeaderText("Player " + (player1Turn ? 1 : 2) + " Wins!");
         alert.setGraphic(new ImageView(player1Turn ? xImage : oImage));
-        alert.setContentText("Congratulations!");
+        alert.setContentText(content);
         alert.showAndWait();
     }
 
-    /**
+    /*
+     * AlertLose -
      * Only needed when networking is established. TODO.
+     * alertWinner("You Lose!", "Better luck next time!");
      */
-    private void alertLose() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("You Lose!");
-        alert.setHeaderText("Player " + (player1Turn ? 1 : 2) + " Wins!");
-        alert.setGraphic(new ImageView(player1Turn ? xImage : oImage));
-        alert.setContentText("Better luck next time!");
-        alert.showAndWait();
-    }
 
     private void alertTie() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Tie!");
         alert.setHeaderText("Everybody Loses.");
+        alert.setGraphic(null);
         alert.setContentText("Better luck next time!");
         alert.showAndWait();
     }
@@ -121,6 +114,9 @@ public class Controller {
 
     @FXML
     public void initialize() {
+        xImage = new Image(getClass().getResourceAsStream("/xImage.png"));
+        oImage = new Image(getClass().getResourceAsStream("/oImage.png"));
+
         player1Turn = true;
         tie = false;
         won = false;
